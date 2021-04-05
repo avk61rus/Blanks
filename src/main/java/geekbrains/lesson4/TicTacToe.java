@@ -69,19 +69,51 @@ public class TicTacToe {
     }
 
     private static boolean checkWin(char c) {               // проверка на победу (проверка наличия 3 фишек в ряд)
-        //horiz
-        if (field[0][0] == c && field[0][1] == c && field[0][2] == c) return true; //проверка первой строки;
-        if (field[1][0] == c && field[1][1] == c && field[1][2] == c) return true; //проверка второй строки;
-        if (field[2][0] == c && field[2][1] == c && field[2][2] == c) return true; //проверка третьей строки;
+//        //horiz
+//        if (field[0][0] == c && field[0][1] == c && field[0][2] == c) return true; //проверка первой строки;
+//        if (field[1][0] == c && field[1][1] == c && field[1][2] == c) return true; //проверка второй строки;
+//        if (field[2][0] == c && field[2][1] == c && field[2][2] == c) return true; //проверка третьей строки;
+//
+//        //vert
+//        if (field[0][0] == c && field[1][0] == c && field[2][0] == c) return true; //проверка первого столбца;
+//        if (field[0][1] == c && field[1][1] == c && field[2][1] == c) return true; //проверка второго столбца;
+//        if (field[0][2] == c && field[1][2] == c && field[2][2] == c) return true; //проверка третьего столбца;
+//
+//        if (field[0][0] == c && field[1][1] == c && field[2][2] == c) return true; //проверка диагонали сверху вниз;
+//        if (field[0][2] == c && field[1][1] == c && field[2][0] == c) return true; //проверка диагонали снизу вверх;
 
-        //vert
-        if (field[0][0] == c && field[1][0] == c && field[2][0] == c) return true; //проверка первого столбца;
-        if (field[0][1] == c && field[1][1] == c && field[2][1] == c) return true; //проверка второго столбца;
-        if (field[0][2] == c && field[1][2] == c && field[2][2] == c) return true; //проверка третьего столбца;
 
-        if (field[0][0] == c && field[1][1] == c && field[2][2] == c) return true; //проверка диагонали сверху вниз;
-        if (field[0][2] == c && field[1][1] == c && field[2][0] == c) return true; //проверка диагонали снизу вверх;
-                                                             //оператор if можно упростить
+        for (int y = 0; y < fieldSizeY; y++) {        //проверка горизонтали;
+            int u = 0;
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (field[y][x] == c) u++;
+                    if(u == 3) return true;
+            }
+        }
+
+        for (int x = 0; x < fieldSizeX; x++) {           //проверка вертикали;
+            int u = 0;
+            for (int y = 0; y < fieldSizeY; y++) {
+                if (field[y][x] == c) u++;
+                    if (u == 3) return true;
+            }
+        }
+
+            int u = 0;
+            for (int y = 0; y < fieldSizeY; y++) {          //проверка диагонали сверху вниз;
+            for (int x = 0; x < fieldSizeX; x++) {
+                if (y == x && field[y][x] == c) u++;
+                 if (u == 3) return true;
+            }
+        }
+
+            u = 0;
+            for (int y = 0; y < fieldSizeY; y++) {          //проверка диагонали снизу вверх;
+                for (int x = 0; x < fieldSizeX; x++) {
+                    if (field[y][x] == c && (x == fieldSizeY-1 - y)) u++;
+                         if (u == 3) return true;
+            }
+        }
         return false;
     }
 
